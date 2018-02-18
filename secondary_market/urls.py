@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^dobuyitem', views.dobuyitem, name='dobuyitem'),
     url(r'^dobuy', views.dobuy, name='dobuy'),
     url(r'^verifypayment', csrf_exempt(views.verifypayment), name='verifypayment'),
+    url(r'^test', views.test, name='test'),
 ]

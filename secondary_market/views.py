@@ -117,8 +117,16 @@ def verifypayment(request):
     payload = request.POST
     P = Payment(json_text= str(payload))
     P.save()
+
+    payload = request.META
+    P = Payment(json_text=str(payload))
+    P.save()
+
     context['pmts'] = Payment.objects.all()
     return render(request, 'verifypayment.html', context)
+
+def test(request):
+    return render(request, 'test.html')
 
 fa_dict = {'0': 'fa-thermometer-0',
  '1': 'fa-thermometer-1',

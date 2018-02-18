@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+                            <form id="" name="addoffer" method="post" action="https://damp-hollows-96010.herokuapp.com/verifypayment" class="">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>Your E-mail</label><input type="text" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9]*.columbia.edu$" placeholder="@columbia.edu address required" name="seller"><br>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit offer</button>
+                            </form>
+</body>
+</html>
