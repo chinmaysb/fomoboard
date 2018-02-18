@@ -17,4 +17,3 @@ class Transaction(models.Model):
     seller_venmo_handle = models.TextField(max_length=50)
     exp_price = models.IntegerField(null=False)
 
-

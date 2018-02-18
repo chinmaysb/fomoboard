@@ -114,10 +114,8 @@ def sell(request):
 
 def verifypayment(request):
     context = dict()
-    context['t'] = str(request.GET)
     output = open('output.txt', 'a')
     output.write("Here I am")
-    output.write(str(request.GET))
     output.close()
     return render(request, 'verifypayment.html', context)
 
