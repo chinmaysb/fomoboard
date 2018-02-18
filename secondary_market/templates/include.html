@@ -1,0 +1,84 @@
+{% load staticfiles %}
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
+
+
+    <!-- Latest compiled and minified FontAwesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{% static "custom.css" %}">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="{% static "source.js" %}"></script>
+
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+
+    <link rel="icon" href="favicon.ico?" type="image/x-icon">
+
+    <title>CBS Secondary Market</title>
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}"><span class="orange"><i class="fa fa-shopping-cart"
+                                                                                   aria-hidden="true"></i> </span>CBS
+                Secondary Market<span style="color:grey"><sup>BETA</sup></span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <!-- li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-calendar"
+                                                                                  aria-hidden="true"></i> Appointments
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item"><a class="nav-link" href=""><i style="color:orange"
+                                                                            class="fa fa-graduation-cap"
+                                                                            aria-hidden="true"></i> Casing Appointments
+                            with 2Y</a></li>
+                        <li class="nav-item"><a class="nav-link" href=""><i style="color:orange"
+                                                                            class="fa fa-calendar-plus-o"
+                                                                            aria-hidden="true"></i> Coaching
+                            Appointments</a></li>
+                    </ul>
+                </li-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item"><a class="nav-link"
+                                        href="mailto:chinmaysb@gmail.com?subject=Vamonos Pest!&body=Report a bug here. Please include a screenshot if possible. Thanks!"><i
+                        class="fa fa-bug" aria-hidden="true"></i> Help!</a></li>
+                <!--li class="nav-item"><a class="nav-link" style="color:orange" href="logout.php">Chinmay Borkar (P0) <i
+                        class="fa fa-sign-out"></i></a></li-->
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+{% block content %}
+{% endblock %}
+</div>
+</body>
+</html>

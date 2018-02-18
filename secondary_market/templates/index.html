@@ -1,0 +1,53 @@
+{% extends 'include.html' %}
+
+{% block content %}
+
+
+    <div class="col-sm-12">
+    {% if TransactionSuccess != None %}
+        {% if TransactionSuccess == True %}
+        <div class="alert alert-success">
+                <h4>Success! </h4>{{ TransactionMessage }}
+        </div>
+        {% else %}
+                    <div class="alert alert-danger">
+                <h4>Oops, that didn't work!</h4>{{ TransactionMessage }}
+        </div>
+        {% endif %}
+    {% endif %}
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><h2> Trade items with the CBS community.</h2></div>
+            <div class="panel-body">
+                <div class="col-md-11">
+                <input class="form-control col-md-11" type="text" id="myInput" onkeyup="myFunction()"
+                       placeholder="Search for items..">
+                </div><div class="col-md-1"><a href="{% url 'sell' %}" class="btn btn-warning btn-block">Sell an item</a></div></div><br>
+                <form class="form-buy" action="{% url 'dobuy' %}" method="post">
+                {% csrf_token %}
+                <div id="myUL">
+                    {% for item in items_for_sale %}
+                            <div class="listitemcontainer">
+                                <div class="panel-body">
+                                <div class="col-md-1">
+                                    <i class="orange fa fa-certificate fa-3x" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-md-9 selllistitem">
+                                    <h4 class="list-group-item-heading bold">{{ item.name }}</h4>
+                                    <p class="list-group-item-text">{{ item.description }}</p>
+
+                                </div>
+                                <div class="col-md-2">            <button name = "buyitem" class="btn btn-success btn-block" type="submit" value="{{ item.txid }}">Buy at ${{ item.buypx }}</button></div>
+
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center"> You are accessing this website from {{ client_ip }}. Your IP address has been logged.<br>© 2018, Chinmay and Raul.</div>
+
+{% endblock %}
