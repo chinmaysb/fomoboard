@@ -114,11 +114,7 @@ def sell(request):
 
 def verifypayment(request):
     context = dict()
-    if 'payload' in request.POST:
-        payload = request.POST
-    else:
-        payload = request.GET
-
+    payload = request.POST
     P = Payment(json_text= str(payload))
     P.save()
     context['pmts'] = Payment.objects.all()
