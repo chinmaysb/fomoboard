@@ -1,6 +1,6 @@
 from secondary_market.mailsender import send_mail
 from django.shortcuts import render
-from secondary_market.models import Transaction, Item
+from secondary_market.models import Transaction, Item, Payment
 from django.db.models import Count, Min, Sum, Avg
 from django.db.models import Q
 # from secondary_market import app_logic
@@ -114,9 +114,9 @@ def sell(request):
 
 def verifypayment(request):
     context = dict()
-    output = open('output.txt', 'a')
-    output.write("Here I am")
-    output.close()
+    P = Payment(json_text= str(request.GET))
+    P.save()
+    context['pmts'] = Payment.objects.all()
     return render(request, 'verifypayment.html', context)
 
 fa_dict = {'0': 'fa-thermometer-0',

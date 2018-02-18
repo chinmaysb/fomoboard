@@ -6,7 +6,9 @@
 
 
 {% block content %}
-    {{ t }}
+       {% for item in pmts %}
+                {{  item.json_text }}
+       {% endfor %}
 {% endblock %}
 </div>
 </body>

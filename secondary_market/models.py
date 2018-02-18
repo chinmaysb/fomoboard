@@ -8,6 +8,9 @@ class Item(models.Model):
     face_value = models.FloatField(null=False)
     expiry_date = models.DateField(null=False, blank=False)
 
+class Payment(models.Model):
+    json_text = models.TextField(max_length=200000, blank=True, null=True)
+
 class Transaction(models.Model):
     id = models.AutoField(primary_key=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
