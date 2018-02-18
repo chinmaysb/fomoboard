@@ -113,13 +113,15 @@ def sell(request):
     return render(request, 'sell.html', context)
 
 def verifypayment(request):
+    # Payment.objects.all().delete()
     context = dict()
-    payload = request.POST
-    P = Payment(json_text= str(payload))
+
+    payload = request.body.decode('utf-8')
+    P = Payment(json_text= "Body: " + str(payload) + ">>>>>>")
     P.save()
 
-    payload = request.META
-    P = Payment(json_text=str(payload))
+    payload = request.META['REMOTE_ADDR']
+    P = Payment(json_text="Meta: " + str(payload) + ">>>>>>>")
     P.save()
 
     context['pmts'] = Payment.objects.all()
