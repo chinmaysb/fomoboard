@@ -8,6 +8,7 @@ from django.shortcuts import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 import venmo as vm
 import random
+import pickle
 
 def home(request, context=dict()):
     items_for_sale = []
@@ -110,6 +111,12 @@ def sell(request):
     context = dict()
     context['items_for_sale'] = Item.objects.all()
     return render(request, 'sell.html', context)
+
+def verifypayment(request):
+    output = open('output.txt', 'wb+')
+    pickle.dump(request.GET, output, pickle.HIGHEST_PROTOCOL)
+    output.close()
+    return render(request, 'include.html', context=dict())
 
 fa_dict = {'0': 'fa-thermometer-0',
  '1': 'fa-thermometer-1',

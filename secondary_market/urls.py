@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^doselloffer', views.doselloffer, name='doselloffer'),
     url(r'^dobuyitem', views.dobuyitem, name='dobuyitem'),
     url(r'^dobuy', views.dobuy, name='dobuy'),
+    url(r'^verifypayment', views.verifypayment, name='verifypayment'),
 ]
