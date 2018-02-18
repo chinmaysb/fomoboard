@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.conf.urls import url
 from secondary_market import views
 from django.contrib.auth.views import login
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,5 +28,5 @@ urlpatterns = [
     url(r'^doselloffer', views.doselloffer, name='doselloffer'),
     url(r'^dobuyitem', views.dobuyitem, name='dobuyitem'),
     url(r'^dobuy', views.dobuy, name='dobuy'),
-    url(r'^verifypayment', views.verifypayment, name='verifypayment'),
+    url(r'^verifypayment', csrf_exempt(views.verifypayment), name='verifypayment'),
 ]
