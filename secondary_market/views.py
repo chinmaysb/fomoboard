@@ -113,10 +113,18 @@ def sell(request):
     return render(request, 'sell.html', context)
 
 def verifypayment(request):
-    output = open('output.txt', 'wb+')
-    pickle.dump(request.GET, output, pickle.HIGHEST_PROTOCOL)
-    output.close()
-    return render(request, 'include.html', context=dict())
+    context = dict()
+    if(request.method=='GET'):
+        context['t'] = str(request.GET)
+        output = open('output.txt', 'a')
+        output.write(str(request.GET))
+        output.close()
+    else:
+        context['t'] = str(request.POST)
+        output = open('output.txt', 'a')
+        output.write(str(request.POST))
+        output.close()
+    return render(request, 'verifypayment.html', context)
 
 fa_dict = {'0': 'fa-thermometer-0',
  '1': 'fa-thermometer-1',
