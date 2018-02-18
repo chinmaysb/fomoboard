@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0fe10cf-5584-407d-807d-eef3e01b1241" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change beforePath="$PROJECT_DIR$/secondary_market/models.py" afterPath="$PROJECT_DIR$/secondary_market/models.py" />
-      <change beforePath="$PROJECT_DIR$/secondary_market/templates/verifypayment.html" afterPath="$PROJECT_DIR$/secondary_market/templates/verifypayment.html" />
       <change beforePath="$PROJECT_DIR$/secondary_market/views.py" afterPath="$PROJECT_DIR$/secondary_market/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,11 +30,11 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/secondary_market/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="740" column="24" lean-forward="true" selection-start-line="740" selection-start-column="24" selection-end-line="740" selection-end-column="24" />
+            <state relative-caret-position="230">
+              <caret line="109" column="18" lean-forward="false" selection-start-line="109" selection-start-column="18" selection-end-line="109" selection-end-column="18" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
-                <element signature="e#5983#22851#0" expanded="false" />
+                <element signature="e#6083#22951#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -117,8 +114,8 @@
         <option value="$PROJECT_DIR$/secondary_market/urls.py" />
         <option value="$PROJECT_DIR$/secondary_market/templates/index.html" />
         <option value="$PROJECT_DIR$/secondary_market/models.py" />
-        <option value="$PROJECT_DIR$/secondary_market/views.py" />
         <option value="$PROJECT_DIR$/secondary_market/templates/verifypayment.html" />
+        <option value="$PROJECT_DIR$/secondary_market/views.py" />
       </list>
     </option>
   </component>
@@ -307,7 +304,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="19" />
+      <option name="time" value="21" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Python.DjangoServer">
@@ -705,11 +702,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/secondary_market/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="740" column="24" lean-forward="true" selection-start-line="740" selection-start-column="24" selection-end-line="740" selection-end-column="24" />
+        <state relative-caret-position="230">
+          <caret line="109" column="18" lean-forward="false" selection-start-line="109" selection-start-column="18" selection-end-line="109" selection-end-column="18" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
-            <element signature="e#5983#22851#0" expanded="false" />
+            <element signature="e#6083#22951#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -8,7 +8,7 @@ from django.shortcuts import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 import venmo as vm
 import random
-import pickle
+import json
 
 def home(request, context=dict()):
     items_for_sale = []
@@ -114,7 +114,12 @@ def sell(request):
 
 def verifypayment(request):
     context = dict()
-    P = Payment(json_text= str(request.GET))
+    if 'payload' in request.POST:
+        payload = request.POST
+    else:
+        payload = request.GET
+
+    P = Payment(json_text= str(payload))
     P.save()
     context['pmts'] = Payment.objects.all()
     return render(request, 'verifypayment.html', context)
