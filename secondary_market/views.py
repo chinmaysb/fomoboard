@@ -114,18 +114,11 @@ def sell(request):
 
 def verifypayment(request):
     context = dict()
-    if(request.method=='GET'):
-        context['t'] = str(request.GET)
-        output = open('output.txt', 'a')
-        output.write("Here I am")
-        output.write(str(request.GET))
-        output.close()
-    else:
-        context['t'] = str(request.POST)
-        output = open('output.txt', 'a')
-        output.write("Here I am")
-        output.write(str(request.POST))
-        output.close()
+    context['t'] = str(request.GET)
+    output = open('output.txt', 'a')
+    output.write("Here I am")
+    output.write(str(request.GET))
+    output.close()
     return render(request, 'verifypayment.html', context)
 
 fa_dict = {'0': 'fa-thermometer-0',
