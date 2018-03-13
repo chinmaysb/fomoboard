@@ -1,0 +1,83 @@
+{% extends 'include.html' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Similar Items</h3></div>
+                <div class="panel-body">
+                    <p>We found some items that are similar to what you're trying to add - please choose one of the items if they fit what you're trying to buy or sell, or continue adding your new item (it's the last one).</p>
+                    <div style="padding-top:px"></div>
+                    <form class="form-buy" action="{% url 'additem' %}" method="post">
+                        {% csrf_token %}
+                        <div id="myBuyUL">
+                            {% for item in similar_items.0 %}
+                                <div class="listitemcontainer">
+                                <div class="panel-body">
+                                    <div class="col-lg-1 center">
+                                        <i class="grey fa {{ item.icon }} fa-3x" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col-lg-10 selllistitem">
+                                        <h4 class="list-group-item-heading bold">{{ item.name }}</h4>
+                                        <p class="list-group-item-text"><i>{{ item.description }}</i></p>
+                                        <p class="list-group-item-text">Face Value ${{ item.face_value }}</p>
+                                        <p class="list-group-item-text"><i>{% if item.isStuGov %}Student Government Event{% endif %}</i></p>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input name="item" type="radio" class="btn btn-success btn-primary btn-block"
+                                               value={{ item.id }}>
+                                    </div>
+                                </div>
+                                </div>
+                            {% endfor %}
+                            <div class="listitemcontainer orange-border">
+                            <div class="panel-body">
+                            <div class="col-lg-1 center">
+                                <i class="orange fa fa-plus fa-3x" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-lg-10 selllistitem">
+                                <h4 class="list-group-item-heading bold">{{ name.0 }}</h4>
+                                <p class="list-group-item-text"><i>{{ description.0 }}</i></p>
+                                <p class="list-group-item-text">Face Value ${{ face_value.0 }}</p>
+                                <p class="list-group-item-text"><i>{% if isStuGov.0 %}Student Government Event{% endif %}</i></p>
+                            </div>
+                            <div class="col-lg-1">
+                                <input name="item" type="radio" class="btn btn-success btn-primary btn-block" value=-1>
+                            </div>
+
+                                <input name="name" hidden type="text" value="{{ name.0 }}">
+                                <input name="description" hidden type="text" value="{{ description.0 }}">
+                                <input name="face_value" hidden type="text" value={{ face_value.0 }}>
+                                <input name="isStuGov" hidden type="text" value="{{ isStuGov.0 }}">
+                                <input name="exec_price" hidden type="text" value={{ exec_price.0 }}>
+                                <input name="context" hidden type="text" value="{{ context.0 }}">
+                                <input name="user" hidden type="text" value="{{ user.0 }}">
+                                <input name="quantity" hidden type="text" value={{ quantity.0 }}>
+                                <input name="user_venmo_handle" hidden type="text" value="{{ user_venmo_handle.0 }}">
+                                <input name="user_phone" hidden type="text" value="{{ user_phone.0 }}">
+                                <input name="expiry_date" hidden type="date" value="{{ expiry_date.0 }}">
+
+                            </div>
+                            </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <button name="submit" class="btn btn-success btn-primary btn-block" type="submit">
+                                    Continue
+                                </button>
+                            </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center"> You are accessing this website from {{ client_ip }}. Your IP address has been logged.<br>©
+        18, all rights reserved.
+    </div>
+
+{% endblock %}

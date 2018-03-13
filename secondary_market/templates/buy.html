@@ -9,18 +9,38 @@
                     <div class="panel panel-default">
                         <div class="panel-heading"><h4>Buy a new item</h4></div>
                         <div class="panel-body">
-                            <form name="additem" method="post" action="{% url 'dobuyitem' %}" class="">
+                            <form name="additem" method="post" action="{% url 'dobuyoffer' %}" class="">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                    <label>Transaction ID {{ transaction.id }}</label><br>
-                                    <input type="hidden" class="form-control" value="{{ transaction.id }}" name="txID"><br>
-                                    <label>Item Name</label><input disabled type="text" class="form-control" value="{{ item_to_buy.name }}" name="name"><br>
-                                    <label>Item Description</label><input disabled type="text" class="form-control" value="{{ item_to_buy.description}}" name="description"><br>
-                                    <label>Face Value $</label><input disabled type="text" class="form-control" value="{{ item_to_buy.face_value}}" name="face_value"><br>
-                                    <label>Price $</label><input disabled type="text" class="form-control" value="{{ transaction.exp_price }}" name="exp_price"><br>
-                                    <label>Your E-mail</label><input required pattern="[a-z0-9._%+-]+@columbia.edu$" type="text" class="form-control" placeholder="@columbia.edu address required" name="buyer"><br>
-                                    <label>Your Venmo Handle</label><input required type="text" class="form-control" placeholder="Please double-check!" name="buyer_venmo_handle"><br>
-                                    </div>
+                                    <label>Transaction ID: {{ transaction.id }}</label><br>
+                                    <input type="hidden" class="form-control" value="{{ transaction.id }}"
+                                           name="txID"><br>
+                                    <label>Item Name</label><input disabled type="text" class="form-control"
+                                                                   value="{{ item_to_buy.name }}" name="name"><br>
+                                    <label>Item Description</label><input disabled type="text" class="form-control"
+                                                                          value="{{ item_to_buy.description }}"
+                                                                          name="description"><br>
+                                    <label>Quantity</label><input disabled type="text" class="form-control"
+                                                                  value="{{ transaction.quantity }}"
+                                                                  name="quantity"><br>
+                                    <label>Face Value $</label><input disabled type="text" class="form-control"
+                                                                      value="{{ item_to_buy.face_value }}"
+                                                                      name="face_value"><br>
+                                    <label>Total Price $</label><input disabled type="text" class="form-control"
+                                                                       value="{{ transaction.exec_price }}"
+                                                                       name="exec_price"><br>
+                                    <label>Pick-up Instructions</label><input disabled type="text" class="form-control"
+                                                                              value={{ transaction.pickup_location }} name="pickup_location"><br>
+                                    <label>Your E-mail</label><input required
+                                                                     pattern="[a-z0-9._%+-]+@[a-z.]*columbia.edu$"
+                                                                     onblur="validate(this);" type="text"
+                                                                     class="form-control"
+                                                                     placeholder="columbia.edu address required"
+                                                                     name="buyer"><br>
+                                    <label>Your Venmo Handle</label><input required type="text" class="form-control"
+                                                                           placeholder="Please double-check!"
+                                                                           name="buyer_venmo_handle"><br>
+                                </div>
                                 <button type="submit" class="btn btn-primary">Buy</button>
                             </form>
                         </div>

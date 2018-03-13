@@ -1,0 +1,60 @@
+{% extends 'include.html' %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h2>{{ context }} Item(s)</h2></div>
+            <div class="panel-body">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4><i class="fa {{ icon }}" aria-hidden="true"></i> {{ context }} an
+                            existing item</h4></div>
+                        <div class="panel-body">
+                            <form name="additem" method="post" action="{% url handler_url %}" class="">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>Transaction ID: {{ id }}</label><br>
+                                    <input type="hidden" class="form-control" value="{{ context }}" name="context"><br>
+                                    <input type="hidden" class="form-control" value="{{ id }}" name="txID"><br>
+                                    <label>Item Name</label><input disabled type="text" class="form-control"
+                                                                   value="{{ name }}" name="name"><br>
+                                    <label>Item Description</label><input disabled type="text" class="form-control"
+                                                                          value="{{ description }}"
+                                                                          name="description"><br>
+                                    <label>Face Value $</label><input disabled type="text" class="form-control"
+                                                                      value="{{ face_value }}" name="face_value"><br>
+                                    <label>Unit Price $</label><input disabled type="text" class="form-control"
+                                                                      value="{{ exec_price }}" name="exec_price"><br>
+                                    <label>Quantity</label><input disabled type="text" class="form-control"
+                                                                  value="{{ quantity }}" name="quantity"><br>
+                                    <label>Total Price $</label><input disabled type="text" class="form-control"
+                                                                       value="{{ total_price }}" name="total_price"><br>
+                                    <label>Pick-up Instructions</label><input disabled type="text" class="form-control"
+                                                                              value={{ pickup_location }} name="pickup_location"><br>
+                                    <label>Your E-mail</label><input required
+                                                                     pattern="[a-z0-9._%+-]+@[a-z.]*columbia.edu$"
+                                                                     onblur="validate(this);" type="text"
+                                                                     class="form-control"
+                                                                     placeholder="columbia.edu address required"
+                                                                     name="user"><br>
+                                    <label>Your Phone Number</label><input required pattern="[0-9]{10}$" type="text"
+                                                                           class="form-control"
+                                                                           placeholder="10 digits only"
+                                                                           name="user_phone"
+                                                                           onblur="validate(this);"><br>
+                                    <label>Your Venmo Handle</label><input required type="text" class="form-control"
+                                                                           placeholder="Please double-check!"
+                                                                           name="user_venmo_handle"><br>
+                                </div>
+                                <button type="submit" class="btn btn-primary">{{ context }}</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

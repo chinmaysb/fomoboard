@@ -1,0 +1,133 @@
+{% extends 'include.html' %}
+
+{% block content %}
+    <div class="col-sm-12">
+        {% if TransactionSuccess != None %}
+            {% if TransactionSuccess == True %}
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <h4>Success! </h4>{{ TransactionMessage }}
+                </div>
+            {% else %}
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <h4>Oops, that didn't work!</h4>{{ TransactionMessage }}
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><h2>{{ context }} Items</h2></div>
+            <div class="panel-body">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>{{ context }} a new item</h4></div>
+                        <div class="panel-body">
+                            <form name="additem" method="post" action="{% url 'checkitem' %}" class="">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input hidden name="context" value="{{ context }}">
+                                    <label>Item Name</label><input required type="text" class="form-control"
+                                                                   placeholder="Short name for the item"
+                                                                   name="name"><br>
+                                    <label class="form-check-label" for="gridCheck1">Check this box if this item
+                                        consists of ticket(s) to a StuGov Event (Afterparties/Fall Ball/Spring
+                                        Gala)</label>&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                        class="form-check-input form-control-lg" type="checkbox" id="isStuGov"
+                                        name="isStuGov" onclick="matchFVPrice()"><br><br>
+                                    <label>Item Description</label><input required type="text" class="form-control"
+                                                                          placeholder="Description for the item"
+                                                                          name="description"><br>
+                                    <label>Face Value $</label><input required type="text" id="FV" class="form-control"
+                                                                      placeholder="Your Estimate of Face value/purchase price"
+                                                                      name="face_value" onblur="matchFVPrice()"><br>
+                                    <div id="warning" class="alert alert-dismissible orange-border"
+                                         style="display:none">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        Price for StuGov events has to be the same as the Face Value.
+                                    </div>
+                                    <label>Price $</label><input required id="px" type="text" class="form-control"
+                                                                 placeholder="Listing price that the buyer will be charged"
+                                                                 name="exec_price" onblur="matchFVPrice()"><br>
+                                    <label>Quantity</label><input required type="text" class="form-control"
+                                                                  placeholder="Number of units" name="quantity" min="1"
+                                                                  max="10"><br>
+                                    <label>Listing Expires on</label><input type="date" class="form-control"
+                                                                            placeholder="Default: 2 weeks"
+                                                                            name="expiry_date"><br>
+                                    <label>Your Phone Number</label><input required pattern="[0-9]{10}$" type="text"
+                                                                           class="form-control"
+                                                                           placeholder="10 digits only"
+                                                                           name="user_phone"
+                                                                           onblur="validate(this);"><br>
+                                    <label>Your E-mail</label><input required
+                                                                     pattern="[a-z0-9._%+-]+@[a-z0-9._%+-]*columbia.edu$"
+                                                                     type="text" class="form-control"
+                                                                     placeholder="Columbia/GSB address required"
+                                                                     name="user"><br>
+                                    <label>Your Venmo Handle</label><input required type="text" class="form-control"
+                                                                           placeholder="Please double-check!"
+                                                                           name="user_venmo_handle"><br>
+                                </div>
+                                <button type="submit" class="btn btn-primary">{{ context }}</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Add a listing for an existing item</h4></div>
+                        <div class="panel-body">
+                            <form id="" name="addoffer" method="post" action="{% url 'addoffer' %}" class="">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input hidden name="context" value="{{ context }}">
+                                    <label for="offereditem">Choose the item that you'd like to {{ context }}</label>
+                                    <select required name="offereditem" id="offereditem" class="form-control"
+                                            onchange="enforceStuGov()">
+                                        <option selected disabled hidden style="display: none" value=""></option>
+                                        {% for item in items %}
+                                            <option value="{{ item.id }}" FV="{{ item.face_value }}"
+                                                    isStuGov="{{ item.isStuGov }}">{{ item.name }}</option>
+                                        {% endfor %}
+                                    </select><br>
+                                    <label>Quantity</label><input required type="text" class="form-control"
+                                                                  placeholder="Number of units you'd like to {{ context }}"
+                                                                  name="quantity" min="1" max="10"><br>
+                                    <div id="warning2" class="alert alert-dismissible orange-border"
+                                         style="display:none">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        Price for StuGov events has to be the same as the Face Value.
+                                    </div>
+
+                                    <label for="formGroupExampleInput">Enter a unit price for the item</label>
+                                    <input id="px_offer" required type="text" class="form-control" placeholder="$" name="exec_price"><br>
+                                    <label>Your E-mail</label><input type="text" class="form-control" required
+                                                                     pattern="[a-z0-9._%+-]+@[a-z.]*columbia.edu$"
+                                                                     onblur="validate(this);"
+                                                                     placeholder="@columbia.edu address required"
+                                                                     name="user"
+                                                                     onblur="validate(this);"><br>
+                                    <label>Your Phone Number</label><input required pattern="[0-9]{10}$" type="text"
+                                                                           class="form-control"
+                                                                           placeholder="10 digits only"
+                                                                           name="user_phone"
+                                                                           onblur="validate(this);"><br>
+                                    <label>Your Venmo Handle</label><input type="text" class="form-control" required
+                                                                           placeholder="Please double-check!"
+                                                                           name="user_venmo_handle"><br>
+
+                                </div>
+                                <button type="submit" class="btn btn-primary">{{ context }}</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

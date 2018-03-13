@@ -1,0 +1,66 @@
+{% extends 'include.html' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>{{ context }} Items: {{ name }}</h3></div>
+                <div class="panel-body">
+                    <div class="col-lg-12">
+                        <input class="form-control col-lg-9" type="text" id="myBuyInput" onkeyup="myFunction(true)"
+                               placeholder="Search for items..">
+                    </div>
+                    <div style="padding-top:50px"></div>
+                    <form class="form-buy" action="{% url handler_url %}" method="post">
+                        {% csrf_token %}
+                        <div id="myBuyUL">
+                            {% if not transactions %}
+                                <div class="listitemcontainer">
+                                    <div class="panel-body">
+                                        <div class="col-lg-1">
+                                            <i class="orange fa fa-times fa-3x" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-lg-9 selllistitem">
+                                            <h4 class="list-group-item-heading bold">No items listed yet!</h4>
+                                            <p class="list-group-item-text"><i>Add the first one by clicking the button
+                                                below.</i></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% for item in transactions %}
+                                <div class="listitemcontainer">
+                                    <div class="panel-body">
+                                        <div class="col-lg-1">
+                                            <i class="orange fa {{ icon }} fa-3x" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-lg-10 selllistitem">
+                                            <h4 class="list-group-item-heading bold">{{ name }} : {{ item.quantity }}
+                                                units</h4>
+                                            <p class="list-group-item-text"><i>{{ description }}</i></p>
+                                            <p class="list-group-item-text"><i>{{ item.pickup_location }}</i></p>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <button name="item" class="btn btn-success btn-primary btn-block"
+                                                    type="submit"
+                                                    value="{{ item.id }}">{{ context }} at
+                                                ${{ item.total_price }}</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            {% endfor %}
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center"> You are accessing this website from {{ client_ip }}. Your IP address has been logged.<br>©
+        2018, all rights reserved.
+    </div>
+
+{% endblock %}

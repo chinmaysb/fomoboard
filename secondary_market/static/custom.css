@@ -1,3 +1,7 @@
+.btn{
+
+    white-space: normal;
+}
 .orange {
     color: orange;
 }
@@ -5,4 +9,37 @@
 .bold {
 
     font-weight: bold;
+}
+
+
+.grey{
+
+    color: grey;
+}
+
+.orange-border
+{
+    border-color: orange;
+}
+
+
+.center
+
+{
+    text-align: center;
+    vertical-align: center;
+
+}
+
+.invisible{
+
+    visibility: hidden;
+    display: none;
+}
+
+.v-center
+
+{
+    vertical-align: center;
+
 }

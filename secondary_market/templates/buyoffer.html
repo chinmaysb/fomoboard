@@ -1,0 +1,75 @@
+{% extends 'include.html' %}
+
+{% block content %}
+
+    <div class="col-sm-12">
+        {% if TransactionSuccess != None %}
+            {% if TransactionSuccess == True %}
+                <div class="alert alert-success">
+                    <h4>Success! </h4>{{ TransactionMessage }}
+                </div>
+            {% else %}
+                <div class="alert alert-danger">
+                    <h4>Oops, that didn't work!</h4>{{ TransactionMessage }}
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h4>Place a bid for a new item</h4></div>
+                <div class="panel-body">
+                    <div class="alert alert-dismissible orange-border">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        You can place a bid here for a new item that hasn't been listed by sellers yet. If a seller is
+                        willing to sell the item you want at or below your price, we will charge you and connect you to
+                        the seller.
+                    </div>
+                    <form name="additem" method="post" action="{% url 'dobuyitem' %}" class="">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Item Name</label><input required type="text" class="form-control"
+                                                           placeholder="Short name for the item" name="name"><br>
+                            <label class="form-check-label" for="gridCheck1">Check this box if this item consists of
+                                ticket(s) to a StuGov Event (Afterparties/Fall Ball/Spring Gala)</label>&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                class="form-check-input form-control-lg" type="checkbox" id="isStuGov" id="gridCheck1"
+                                onclick="matchFVPrice()"><br><br>
+                            <label>Item Description</label><input required type="text" class="form-control"
+                                                                  placeholder="Description for the item"
+                                                                  name="description"><br>
+                            <label>Face Value $</label><input required type="text" id="FV" class="form-control"
+                                                              placeholder="Your Estimate of Face value/purchase price"
+                                                              name="face_value" onblur="matchFVPrice()"><br>
+                            <div id="warning" class="alert alert-dismissible orange-border" style="display:none">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                Price for StuGov events has to be the same as the Face Value.
+                            </div>
+                            <label>Price $</label><input required id="px" type="text" class="form-control"
+                                                         placeholder="This is the price that you will be charged"
+                                                         name="exec_price" onblur="matchFVPrice()"><br>
+                            <label>Quantity</label><input required type="text" class="form-control"
+                                                          placeholder="Number of units you'd like to buy"
+                                                          name="quantity" min="1" max="10"><br>
+                            <label>Listing Expires on</label><input type="date" class="form-control"
+                                                                    placeholder="Default: 2 weeks"
+                                                                    name="expiry_date"><br>
+                            <label>Your Phone Number</label><input required pattern="[0-9]{10}$" type="text"
+                                                                   class="form-control" placeholder="10 digits only"
+                                                                   name="buyer_phone" onblur="validate(this);"><br>
+                            <label>Your E-mail</label><input required
+                                                             pattern="[a-z0-9._%+-]+@[a-z0-9._%+-]*columbia.edu$"
+                                                             type="text" class="form-control"
+                                                             placeholder="Columbia/GSB address required"
+                                                             name="buyer"><br>
+                            <label>Your Venmo Handle</label><input required type="text" class="form-control"
+                                                                   placeholder="Please double-check!"
+                                                                   name="buyer_venmo_handle"><br>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit offer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+{% endblock %}
