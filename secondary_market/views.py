@@ -162,8 +162,8 @@ def addoffer(request):
         new_quantity = request.POST['quantity']
         new_exec_price = request.POST['exec_price']
         buy_or_sell = request.POST['context']
-        if type(request.POST['offereditem']) == int:
-            item = Item.objects.get(id=request.POST['offereditem'].id)
+        if type(request.POST['offereditem']) != Item:
+            item = Item.objects.get(id=request.POST['offereditem'])
         else:
             item = request.POST['offereditem']
         if (buy_or_sell == "Buy"):
@@ -264,7 +264,7 @@ def dodispute(request):
                 'TransactionMessage'] = "You have successfully raised a dispute for the transaction bearing ID " + str(
                 T.id) + ". Someone from our team will be in touch shortly."
             createEmail(T, "self", "CBS Secondary Market Transaction ID#" + str(T.id),
-                        context['TransactionMessage'] + request.POST['dispute'])
+                        context['TransactionMessage'] + "Original text of the request: " + request.POST['dispute'])
             return home(request, context)
         except Exception as e:
             print(e)
@@ -278,7 +278,7 @@ def dodispute(request):
                 'TransactionMessage'] = "You have successfully raised a dispute for the transaction bearing ID " + str(
                 T.id) + ". Someone from our team will be in touch shortly."
             createEmail(T, "self", "CBS Secondary Market Transaction ID#" + str(T.id),
-                        context['TransactionMessage'] + request.POST['dispute'])
+                        context['TransactionMessage'] + "Original text of the request: " + request.POST['dispute'])
             return home(request, context)
         except Exception as e:
             print(e)

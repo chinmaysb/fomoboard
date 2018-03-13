@@ -28,9 +28,9 @@ class Transaction(models.Model):
     seller = models.TextField(max_length=250, blank=True, null=True)
     seller_phone = models.TextField(max_length=10, blank=True, null=True)
     seller_venmo_handle = models.TextField(max_length=100, blank=True, null=True)
-    exec_price = models.IntegerField(null=False, blank=True, default=0)  # This is the unit price, to be treated as such
-    reserve_price = models.IntegerField(null=False, blank=True, default=9999)
-    decay_rate = models.IntegerField(null=False, blank=True, default=0)
+    exec_price = models.FloatField(null=False, blank=True, default=0)  # This is the unit price, to be treated as such
+    reserve_price = models.FloatField(null=False, blank=True, default=9999)
+    decay_rate = models.FloatField(null=False, blank=True, default=0)
     pickup_location = models.TextField(max_length=500, blank=True, null=False, default="On-campus")
     email_sent = models.BooleanField(null=False, blank=False, default=False)
     email_tries = models.IntegerField(null=False, blank=True, default=0)
@@ -50,7 +50,7 @@ class Payment(models.Model):
     txid = models.ForeignKey(Transaction, on_delete=models.CASCADE)
     byVenmo = models.BooleanField(null=False, blank=False, default=True)
     receipient = models.TextField(max_length=100, blank=True, null=True)
-    amount = models.IntegerField(null=False, blank=True, default=9999)
+    amount = models.FloatField(null=False, blank=True, default=9999)
     complete = models.BooleanField(null=False, blank=False, default=False)
     tstamp = models.DateTimeField(auto_now=True)
 
